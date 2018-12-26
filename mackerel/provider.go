@@ -6,20 +6,29 @@ import (
 )
 
 const (
-	MackerelAPIKeyParamName = "MACKEREL_API_KEY"
+	defaultBaseURL = "https://api.mackerelio.com/"
 )
 
 // Provider returns a terraform.ResourceProvider.
 func Provider() terraform.ResourceProvider {
 	return &schema.Provider{
 		Schema: map[string]*schema.Schema{
-			"api_key": &schema.Schema{
+			"api_key": {
 				Type:        schema.TypeString,
 				Required:    true,
-				DefaultFunc: schema.EnvDefaultFunc(MackerelAPIKeyParamName, nil),
-				Description: "your Mackerel APIKey",
+				DefaultFunc: schema.EnvDefaultFunc("MACKEREL_APIKEY", nil),
+				Description: `The API key of the organization to which targeted hosts and services belong.`,
+			},
+			"base_url": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				DefaultFunc: schema.EnvDefaultFunc("MACKEREL_BASE_URL", defaultBaseURL),
+				Description: ``,
 			},
 		},
+
+		DataSourcesMap: map[string]*schema.Resource{},
+
 		ResourcesMap: map[string]*schema.Resource{
 			"mackerel_host_monitor":       resourceMackerelHostMonitor(),
 			"mackerel_service_monitor":    resourceMackerelServiceMonitor(),
@@ -27,13 +36,15 @@ func Provider() terraform.ResourceProvider {
 			"mackerel_expression_monitor": resourceMackerelExpressionMonitor(),
 			"mackerel_dashboard":          resourceMackerelDashboard(),
 		},
+
 		ConfigureFunc: providerConfigure,
 	}
 }
 
 func providerConfigure(d *schema.ResourceData) (interface{}, error) {
-	config := Config{
+	config := &Config{
 		ApiKey: d.Get("api_key").(string),
+		RawURL: d.Get("base_url").(string),
 	}
 
 	return config.NewClient()

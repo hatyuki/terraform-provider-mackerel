@@ -12,7 +12,7 @@ require (
 	github.com/hashicorp/hil v0.0.0-20170627220502-fa9f258a9250 // indirect
 	github.com/hashicorp/logutils v1.0.0 // indirect
 	github.com/hashicorp/terraform v0.11.11
-	github.com/kjmkznr/terraform-provider-mackerel v0.1.0
+	github.com/kjmkznr/terraform-provider-mackerel v0.1.0 // indirect
 	github.com/mackerelio/mackerel-client-go v0.1.1-0.20181226013503-6512055c600d
 	github.com/mitchellh/cli v1.0.0 // indirect
 	github.com/mitchellh/copystructure v1.0.0 // indirect
