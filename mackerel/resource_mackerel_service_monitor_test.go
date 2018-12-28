@@ -1,5 +1,7 @@
 package mackerel
 
+/*
+
 import (
 	"fmt"
 	"testing"
@@ -180,3 +182,4 @@ resource "mackerel_service_monitor" "foobar" {
     critical              = 90.0
     notification_interval = 10
 }`
+*/

@@ -1,5 +1,7 @@
 package mackerel
 
+/*
+
 import (
 	"log"
 
@@ -177,3 +179,4 @@ func resourceMackerelHostMonitorDelete(d *schema.ResourceData, meta interface{})
 
 	return nil
 }
+*/

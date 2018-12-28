@@ -1,5 +1,7 @@
 package mackerel
 
+/*
+
 import (
 	"log"
 
@@ -191,3 +193,4 @@ func getMackerelExternalMonitorInput(d *schema.ResourceData) *mackerel.MonitorEx
 
 	return input
 }
+*/

@@ -1,5 +1,7 @@
 package mackerel
 
+/*
+
 import (
 	"fmt"
 	"testing"
@@ -188,3 +190,4 @@ resource "mackerel_external_monitor" "foobar" {
     name                   = "terraform_for_mackerel_test_foobar_min"
 	url                    = "https://terraform.io/"
 }`
+*/

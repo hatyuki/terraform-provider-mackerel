@@ -30,11 +30,11 @@ func Provider() terraform.ResourceProvider {
 		DataSourcesMap: map[string]*schema.Resource{},
 
 		ResourcesMap: map[string]*schema.Resource{
-			"mackerel_host_monitor":       resourceMackerelHostMonitor(),
-			"mackerel_service_monitor":    resourceMackerelServiceMonitor(),
-			"mackerel_external_monitor":   resourceMackerelExternalMonitor(),
-			"mackerel_expression_monitor": resourceMackerelExpressionMonitor(),
-			"mackerel_dashboard":          resourceMackerelDashboard(),
+			"mackerel_dashboard": resourceMackerelDashboard(),
+			//"mackerel_expression_monitor": resourceMackerelExpressionMonitor(),
+			//"mackerel_external_monitor":   resourceMackerelExternalMonitor(),
+			//"mackerel_host_monitor":       resourceMackerelHostMonitor(),
+			//"mackerel_service_monitor":    resourceMackerelServiceMonitor(),
 		},
 
 		ConfigureFunc: providerConfigure,

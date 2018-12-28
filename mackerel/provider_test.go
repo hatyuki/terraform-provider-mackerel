@@ -29,7 +29,7 @@ func TestProvider_impl(t *testing.T) {
 }
 
 func testAccPreCheck(t *testing.T) {
-	if v := os.Getenv("MACKEREL_API_KEY"); v == "" {
-		t.Fatal("MACKEREL_API_KEY must be set for acceptance tests")
+	if v := os.Getenv("MACKEREL_APIKEY"); v == "" {
+		t.Fatal("MACKEREL_APIKEY must be set for acceptance tests")
 	}
 }

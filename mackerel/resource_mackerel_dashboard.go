@@ -9,28 +9,25 @@ import (
 
 func resourceMackerelDashboard() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceMackerelDashboardCreate,
-		Read:   resourceMackerelDashboardRead,
-		Update: resourceMackerelDashboardUpdate,
-		Delete: resourceMackerelDashboardDelete,
-		Importer: &schema.ResourceImporter{
-			State: schema.ImportStatePassthrough,
-		},
+		Create:   resourceMackerelDashboardCreate,
+		Read:     resourceMackerelDashboardRead,
+		Update:   resourceMackerelDashboardUpdate,
+		Delete:   resourceMackerelDashboardDelete,
+		Exists:   nil,
+		Importer: &schema.ResourceImporter{State: schema.ImportStatePassthrough},
+
+		SchemaVersion: 0,
 
 		Schema: map[string]*schema.Schema{
-			"id": &schema.Schema{
-				Type:     schema.TypeString,
-				Computed: true,
-			},
-			"title": &schema.Schema{
+			"title": {
 				Type:     schema.TypeString,
 				Required: true,
 			},
-			"body_markdown": &schema.Schema{
+			"body_markdown": {
 				Type:     schema.TypeString,
 				Required: true,
 			},
-			"url_path": &schema.Schema{
+			"url_path": {
 				Type:         schema.TypeString,
 				Required:     true,
 				ValidateFunc: validateUrlPathWord,
@@ -63,16 +60,23 @@ func resourceMackerelDashboardRead(d *schema.ResourceData, meta interface{}) err
 	client := meta.(*mackerel.Client)
 
 	log.Printf("[DEBUG] Reading mackerel dashboard: %q", d.Id())
+
 	dashboard, err := client.FindDashboard(d.Id())
 	if err != nil {
 		return err
 	}
-
-	d.Set("id", dashboard.ID)
-	d.Set("title", dashboard.Title)
-	d.Set("body_markdown", dashboard.BodyMarkDown)
-	d.Set("url_path", dashboard.URLPath)
-
+	if err := d.Set("id", dashboard.ID); err != nil {
+		return err
+	}
+	if err := d.Set("title", dashboard.Title); err != nil {
+		return err
+	}
+	if err := d.Set("body_markdown", dashboard.BodyMarkDown); err != nil {
+		return err
+	}
+	if err := d.Set("url_path", dashboard.URLPath); err != nil {
+		return err
+	}
 	return nil
 }
 
